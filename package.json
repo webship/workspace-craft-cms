@@ -27,6 +27,15 @@
   "workspacePlugin": {
     "name": "craft-cms",
     "label": "Craft CMS",
+    "needs": [
+      [
+        "dev",
+        "test",
+        "sandboxes",
+        "demos"
+      ],
+      "ai-agents"
+    ],
     "commands": {
       "types": [
         "sites"
