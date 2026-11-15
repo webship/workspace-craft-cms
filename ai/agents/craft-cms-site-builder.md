@@ -110,3 +110,11 @@ project (`stop` takes no `-y`), `bash cmd-tools-backup-<folder>.sh <name>`,
 | `this site's is not administrator` from `--add-users` | The site's one account is the workspace account, and the edition has no second: build it again with `--install --add-users` if it is to be tested with the default account. |
 | A template change does not show | The caches: `bash cmd-tools-craft-cms-cli.sh <name> --flush`. |
 | `is not a Craft CMS project` from the CLI tool | The project's `.ddev/config.yaml` does not say `type: craftcms`: it was not built by this builder. |
+
+## What comes with you
+
+The Craft CMS plugin places these beside you, each in the workspace folder of its kind: the agent
+`craft-cms-tester` (`ai-agents/`), the skill `craft-cms-scenarios` (`ai-skills/`), the command
+`/craft-cms-test <site>` (`ai-commands/`) and the prompt `craft-cms-build-and-test` (`ai-prompts/`), which is
+this agent's whole first job as a launch command: build, say what the site is, set the testing
+stack up, run the first feature.

@@ -15,7 +15,7 @@ test('the manifest names the platform, and every file it names ships', () => {
   assert.strictEqual(manifest.name, PLATFORM);
   assert.match(read('commands/cmd-craft-cms-project.sh'), new RegExp(`^distribution_name="${PROJECT_TYPE}";$`, 'm'), 'the user list is named after the DDEV project type');
   const named = [...manifest.commands.files, ...manifest.scripts.functions, ...manifest.scripts.args, ...manifest.scripts.machine,
-    ...manifest.ai.agents, ...manifest.features];
+    ...manifest.ai.agents, ...manifest.ai.skills, ...manifest.ai.commands, ...manifest.ai.prompts, ...manifest.features];
   for (const f of named) assert.ok(fs.existsSync(path.join(PKG, f)), `${f} is in the package`);
   assert.deepStrictEqual(manifest.commands.files.map((f: string) => path.basename(f)), COMMANDS);
   assert.deepStrictEqual(manifest.ai.agents.map((f: string) => path.basename(f, '.md')), AGENTS);
@@ -67,11 +67,11 @@ test('each agent is a definition the AI Agents folder can list: named after its 
     assert.match(head, /^tools:\n(  - \S+\n?)+/m);
     assert.match(src, /cmd-tools-testing\.sh|cmd-craft-cms-project\.sh/, `${f} names the plugin's commands`);
   }
-  const tester = read('agents/craft-cms-tester.md');
+  const tester = read('ai/agents/craft-cms-tester.md');
   assert.match(tester, /Never create an account in a suite/);
   assert.match(tester, /No platform name in a step phrase/);
   assert.match(tester, /Playwright MCP browser first/);
-  const builder = read('agents/craft-cms-site-builder.md');
+  const builder = read('ai/agents/craft-cms-site-builder.md');
   assert.match(builder, /Containers only/);
   assert.match(builder, /Solo only/);
 });
@@ -102,7 +102,7 @@ test('register() adds the assistant context and nothing else', () => {
 });
 
 test('the docs say container-based, name only Webship, and carry no personal value', () => {
-  const docs = ['README.md', ...manifest.ai.agents, 'scripts/functions/fun-craft-cms.sh'];
+  const docs = ['README.md', 'docs/plugin-items-pattern.md', ...manifest.ai.agents, 'scripts/functions/fun-craft-cms.sh'];
   for (const f of docs) {
     const src = read(f);
     assert.doesNotMatch(src, /DDEV-only/i, `${f}: the workspace is container-based, DDEV by default`);

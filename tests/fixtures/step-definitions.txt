@@ -1,0 +1,394 @@
+# @webship-js/craft-cms-steps 2.0.0 and webship-js 2.0.10
+^a (GET|POST|PUT|PATCH|DELETE) request to "([^"]*)" should have been made$
+^all cookies are cleared$
+^a request to "([^"]*)" should have been made$
+^block (\d+) of the "([^"]*)" field should be an? "([^"]*)" block$
+^(\d+) items? should be selected in the index$
+^eventually (I |we )*should see "([^"]*)"(?: within (\d+) seconds?)?$
+^every ARIA reference should resolve$
+^every ARIA role should be valid$
+^every button should have an accessible name$
+^every form field should have an accessible label$
+^every image should have an alt attribute$
+^every link should have an accessible name$
+^(I am |we are )?an anonymous user$
+^(?:I am|we are) authenticating as "([^"]*)" with "([^"]*)" password$
+^(I am |we are )?on( the)* (homepage|frontpage)$
+^(I am |we are )*on( the)* "([^"]*)?"( page)*$
+^(I am |we are )?viewing the site on a (?:"([^"]+)"|([a-zA-Z0-9 _,]+)) (?:screen|device)$
+^(I go |I navigate |we go |we navigate |navigating )?to "([^"]*)?"$
+^(I go |I navigate |we go |we navigate |navigating )?to( the)* (homepage|frontpage)$
+^(I scroll|we scroll|scrolling)? down(?: (\d+))?$
+^(I scroll|we scroll|scrolling)? left(?: (\d+))?$
+^(I scroll|we scroll|scrolling)? right(?: (\d+))?$
+^(I scroll|we scroll|scrolling)? to bottom of "([^"]*)"$
+^(I scroll|we scroll|scrolling)? to end of "([^"]*)"$
+^(I scroll|we scroll|scrolling)? to start of "([^"]*)"$
+^(I scroll|we scroll|scrolling)? to( the)* bottom( of the page)*$
+^(I scroll|we scroll|scrolling)? to( the)* end( of the page)*$
+^(I scroll|we scroll|scrolling)? to( the)* start( of the page)*$
+^(I scroll|we scroll|scrolling)? to( the)* top( of the page)*$
+^(I scroll|we scroll|scrolling)? to top of "([^"]*)"$
+^(I scroll|we scroll|scrolling)? up(?: (\d+))?$
+^(?:I set the header|we set the header|the header) "([^"]*)" (?:to|is) "([^"]*)"$
+^(?:I set the request body to|we set the request body to|the request body is) '([^']*)'$
+^I should not see "([^"]*)" inside the iframe$
+^I should see "([^"]*)" inside the iframe$
+^(I |we )*accept all confirmation dialogs$
+^(I |we )*add a "([^"]*)" block to the "([^"]*)" field$
+^(I |we )*additionally select "([^"]*)" from "([^"]*)"$
+^(I |we )*add "([^"]*)" selector for "([^"]*)" css selector$
+^(I |we )*add "([^"]*)" selector for "([^"]*)" xpath selector$
+^(I |we )*add selectors from "([^"]*)" file$
+^(I |we )*add the tag "([^"]*)" to the "([^"]*)" field$
+^(I |we )*add "([^"]*)" to the "([^"]*)" field$
+^(I |we )*advance the clock by (\d+) minutes?$
+^(I |we )*advance the clock by (\d+) ?ms$
+^(I |we )*advance the clock by (\d+) seconds?$
+^(I |we )*(am logged in|are logged in|log in) to the control panel as "([^"]*)"$
+^(I |we )*answer the file conflict with "([^"]*)"$
+^(I |we )*apply the draft$
+^(I |we )*ask for a password reset for "([^"]*)"$
+^(I |we )*attach( the)* file "([^"]*)?" to "([^"]*)?"$
+^(I |we )*check "([^"]*)?"$
+^(I |we )*check the checkbox "([^"]*)"$
+^(I |we )*choose "([^"]*)" for the selected items of the index$
+^(I |we )*choose "([^"]*)" from the actions menu of the edit form$
+^(I |we )*choose "([^"]*)" from the menu of the "([^"]*)" crumb$
+^(I |we )*choose "([^"]*)" from the save menu of the edit form$
+^(I |we )*choose "([^"]*)" in the "([^"]*)" dropdown$
+^(I |we )*choose the new password (of )?"([^"]*)"$
+^(I |we )*choose the radio button "([^"]*)"$
+^(I |we )*clear the auth state$
+^(I |we )*clear the search of the index$
+^(I |we )*clear the select "([^"]*)"$
+^(I |we )*click "([^"]*)?"$
+^(I |we )*click "([^"]*)?"( button)* in( the)* modal( dialog)*$
+^(I |we )*click "([^"]*)" by attr inside the iframe$
+^(I |we )*click "([^"]*)?" by( its)*(?: "([^"]*)?")* (attribute|attr)$
+^(I |we )*click "([^"]*)" inside the iframe$
+^(I |we )*click "([^"]*)" in the control panel breadcrumb$
+^(I |we )*click "([^"]*)" in the control panel navigation$
+^(I |we )*click "([^"]*)?" in( the)* "([^"]*)?" row$
+^(I |we )*click (?:on |a )?([a-zA-Z0-9 ,\-]+)$
+^(I |we )*click on "([^"]*)" in the modal$
+^(I |we )*click on the element "([^"]*)"$
+^(I |we )*click on the link with the title "([^"]*)"$
+^(I |we )*click on "([^"]*)" while holding "([^"]*)"$
+^(I |we )*click the "([^"]*)" (button|link|tab|menuitem|checkbox|radio|option)$
+^(I |we )*click the "([^"]*)" column heading of the index$
+^(I |we )*click "([^"]*)" under "([^"]*)" in the control panel navigation$
+^(I |we )*(close|dismiss)( the)* modal( dialog)*$
+^(I |we )*close the preview$
+^(I |we )*close the slide-out editor$
+^(I |we )*create a draft from the edit form$
+^(I |we )*define css selectors:$
+^(I |we )*define xpath selectors:$
+^(I |we )*delete block (\d+) of the "([^"]*)" field$
+^(I |we )*discard the unsaved changes$
+^(I |we )*do not accept any confirmation dialogs$
+^(I |we )*(don't|do not) see ([a-zA-Z0-9 ,\-]+)$
+^(I |we )*double[- ]click on "([^"]*)"$
+^(I |we )*download the file from the link "([^"]*)"$
+^(I |we )*download the file from the URL "([^"]*)"$
+^(I |we )*drag "([^"]*)" to "([^"]*)"$
+^(I |we )*fill in "([^"]*)?" for "([^"]*)?"$
+^(I |we )*fill in "([^"]*)?" for "([^"]*)?" by( its)*(?: "([^"]*)?")* (attribute|attr)$
+^(I |we )*fill in the color field "([^"]*)" with the value "([^"]*)"$
+^(I |we )*fill in the date part of the datetime field "([^"]*)" with "([^"]*)"$
+^(I |we )*fill in the datetime field "([^"]*)" with date "([^"]*)" and time "([^"]*)"$
+^(I |we )*fill in the end datetime field "([^"]*)" with date "([^"]*)" and time "([^"]*)"$
+^(I |we )*fill in the "([^"]*)" field with "([^"]*)"$
+^(I |we )*fill in the field "([^"]*)" with "([^"]*)"$
+^(I |we )*fill in( the)* following:$
+^(I |we )*fill in( the)* following: by( its)*(?: "([^"]*)?")* (attribute|attr)$
+^(I |we )*fill in the multi-value field "([^"]*)" with the following values:$
+^(I |we )*fill in the rich text field "([^"]*)" with "([^"]*)"$
+^(I |we )*fill in the start datetime field "([^"]*)" with date "([^"]*)" and time "([^"]*)"$
+^(I |we )*fill in the time part of the datetime field "([^"]*)" with "([^"]*)"$
+^(I |we )*fill in the WYSIWYG field "([^"]*)" with the "([^"]*)"$
+^(I |we )*fill in "([^"]*)?" with "([^"]*)?"$
+^(I |we )*fill in "([^"]*)?" with:$
+^(I |we )*fill in "([^"]*)?" with "([^"]*)?" by( its)*(?: "([^"]*)?")* (attribute|attr)$
+^(I |we )*fill in "([^"]*)?" with: by( its)*(?: "([^"]*)?")* (attribute|attr)$
+^(I |we )*fill in "([^"]*)" with "([^"]*)" in block (\d+) of the "([^"]*)" field$
+^(I |we )*fill in "([^"]*)" with "([^"]*)" inside the iframe$
+^(I |we )*filter the index by the "([^"]*)" status$
+^(I |we )*focus on the element "([^"]*)"$
+^(I |we )*follow "([^"]*)"$
+^(I |we )*go back$
+^(I |we )*(go to|am on|are on) the control panel page "([^"]*)"$
+^(I |we )*go to page (\d+) of the "([^"]*)" listing$
+^(I |we )*go to the (next|previous) page of the index$
+^(I |we )*hover over "([^"]*)"$
+^(I |we )*hover over the element "([^"]*)"$
+^(I |we )*log in to the control panel with the username "([^"]*)" and the password "([^"]*)"$
+^(I |we )*log out of the control panel$
+^(I |we )*middle[- ]click on "([^"]*)"$
+^(I |we )*move "([^"]*)" (above|below) "([^"]*)" in the index$
+^(I |we )*move backward one page$
+^(I |we )*move focus to "([^"]*)" field$
+^(I |we )*move forward one page$
+^(I |we )*move the pointer to "([^"]*)"$
+^(I |we )*open "([^"]*)" from the index$
+^(I |we )*open "([^"]*)" in a slide-out editor$
+^(I |we )*open the password reset link sent to "([^"]*)"$
+^(I |we )*open the preview of the edit form$
+^(I |we )*open the "([^"]*)" screen of the section navigation$
+^(I |we )*open the "([^"]*)" source of the index$
+^(I |we )*open the "([^"]*)" tab of the edit form$
+^(I |we )*pause the clock$
+^(I |we )*press "([^"]*)?" by( its)*(?: "([^"]*)?")* (attribute|attr)$
+^(I |we )*press( the)* "([^"]*)?"( button)*$
+^(I |we )*press the key "([^"]*)"$
+^(I |we )*press the key "([^"]*)" on the element "([^"]*)"$
+^(I |we )*press the keys "([^"]*)"$
+^(I |we )*press the keys "([^"]*)" on the element "([^"]*)"$
+^(I |we )*print accessibility violations$
+^(I |we )*print css selectors$
+^(I |we )*print last XML response$
+^(I |we )*print last YAML response$
+^(?:I |we )*print the full accessibility check$
+^(I |we )*print xpath selectors$
+^(I |we )*reload( the)*( page)*$
+^(I |we )*remove "([^"]*)" from the "([^"]*)" field$
+^(I |we )*restore the auth state from "([^"]*)"$
+^(I |we )*resume the clock$
+^(I |we )*right[- ]click on "([^"]*)"$
+^(I |we )*save (\d+) x (\d+) screenshot$
+^(I |we )*save fullscreen (\d+) x (\d+) screenshot$
+^(I |we )*save fullscreen screenshot$
+^(I |we )*save fullscreen screenshot with name "([^"]*)"$
+^(I |we )*save screenshot$
+^(I |we )*save screenshot with name "([^"]*)"$
+^(I |we )*save the auth state to "([^"]*)"$
+^(I |we )*save the current video as "([^"]*)"$
+^(I |we )*save the edit form$
+^(I |we )*scroll to the element "([^"]*)"$
+^(I |we )*search the index for "([^"]*)"$
+^(I |we )*see ([a-zA-Z0-9 ,\-]+) above ([a-zA-Z0-9 ,\-]+)$
+^(I |we )*see ([a-zA-Z0-9 ,\-]+) below ([a-zA-Z0-9 ,\-]+)$
+^(I |we )*see ([a-zA-Z0-9 ,\-]+) has focus$
+^(I |we )*see ([a-zA-Z0-9 ,\-]+) inside of ([a-zA-Z0-9 ,\-]+)$
+^(I |we )*see ((?:[a-zA-Z0-9 ,\-](?!not))+) over ([a-zA-Z0-9 ,\-]+)$
+^(I |we )*see ([a-zA-Z0-9 ,\-]+) not over ([a-zA-Z0-9 ,\-]+)$
+^(I |we )*see ([a-zA-Z0-9 ,\-]+) outside of ([a-zA-Z0-9 ,\-]+)$
+^(I |we )*see ([a-zA-Z0-9 ,\-]+) to (?:the )?left of ([a-zA-Z0-9 ,\-]+)$
+^(I |we )*see ([a-zA-Z0-9 ,\-]+) to (?:the )?right of ([a-zA-Z0-9 ,\-]+)$
+^(I |we )*see visible ([a-zA-Z0-9 ,\-]+)$
+^(I |we )*select all items in the index$
+^(I |we )*select all text in "([^"]*)" field$
+^(I |we )*select "([^"]*)?" from "([^"]*)?"$
+^(I |we )*select from (\d+) to (\d+) text in "([^"]*)" field$
+^(I |we )*select "([^"]*)" in the index$
+^(I |we )*select radio button "([^"]*)?"$
+^(I |we )*select "([^"]*)" text in "([^"]*)" field$
+^(?:I |we )?send a ([A-Z]+) request to "([^"]+)"$
+^(?:I |we )?send a ([A-Z]+) request to "([^"]+)" with body:$
+^(?:I |we )?send a ([A-Z]+) request to "([^"]+)" with form data:$
+^(?:I |we )?send a ([A-Z]+) request to "([^"]+)" with values:$
+^(I |we )*send a REST "([^"]*)" request to "([^"]*)"$
+^(I |we )*send a REST "([^"]*)" request to "([^"]*)" with body:$
+^(?:I |we )?set header "([^"]*)" with value "([^"]*)"$
+^(?:I|we) set placeholder "([^"]*)" to "([^"]*)"$
+^(I |we )*set the "([^"]*)" date to "([^"]*)"$
+^(?:I|we) set the following headers:$
+^(?:I|we) set the request body with:$
+^(I |we )*set the status of the selected items to "([^"]*)"$
+^(I |we )*set the system time to "([^"]*)"$
+^(I |we )*set the viewport height to (\d+)$
+^(I |we )*set the viewport size to (\d+)x(\d+)$
+^(I |we )*set the viewport to (\d+) by (\d+)$
+^(I |we )*set the viewport to the "([^"]*)" breakpoint$
+^(I |we )*set the viewport width to (\d+)$
+^(I |we )*should be logged in to the control panel as "([^"]*)"$
+^(I |we )*should be on page (\d+) of the listing$
+^(I |we )*should( not)* be allowed to open the control panel page "([^"]*)"$
+^(I |we )*should( not)* be logged in to the control panel$
+^(I |we )*should( not)* be on( the)* (homepage|frontpage)$
+^(I |we )*should( not)* be on( the)* "([^"]*)?"( page)*$
+^(I |we )*should( not)* see "([^"]*)?"$
+^(I |we )*should( not)* see (a|an) "([^"]*)?" element$
+^(I |we )*should( not)* see (a|an) "([^"]*)?" element by( its)*(?: "([^"]*)?")* (attribute|attr)$
+^(I |we )*should not see an error notification$
+^(I |we )*should( not)* see a slide-out editor$
+^(I |we )*should( not)* see (a |the )*"([^"]*)?" modal$
+^(I |we )*should( not)* see (a |the )*modal( dialog)*$
+^(I |we )*should( not)* see (a |the )*modal with title "([^"]*)?"$
+^(I |we )*should( not)* see "([^"]*)" in the control panel navigation$
+^(I |we )*should( not)* see "([^"]*)?" in( the)* "([^"]*)?" element$
+^(I |we )*should( not)* see "([^"]*)?" in( the)* "([^"]*)?" element by( its)*(?: "([^"]*)?")* (attribute|attr)$
+^(I |we )*should( not)* see "([^"]*)" in the index$
+^(I |we )*should( not)* see "([^"]*)?" in( the)* modal( dialog)*$
+^(I |we )*should( not)* see "([^"]*)?" in( the)* "([^"]*)?" row$
+^(I |we )*should( not)* see text matching "([^"]*)?"$
+^(I |we )*should( not)* see text matching "([^"]*)?" in( the)* "([^"]*)?" element$
+^(I |we )*should( not)* see the control panel login form$
+^(I |we )*should( not)* see the file conflict question$
+^(I |we )*should( not)* see the "([^"]*)" source in the index$
+^(I |we )*should( not)* see the unsaved changes notice$
+^(I |we )*should see (\d+) "([^"]*)" elements?$
+^(I |we )*should see the login error "([^"]*)"$
+^(I |we )*should see the new password error "([^"]*)"$
+^(I |we )*should see the password reset confirmation$
+^(I |we )*should see the (success |error |notice )?notification "([^"]*)"$
+^(I |we )*should see the unauthorized screen(?: with "([^"]*)")?$
+^(I |we )*(show|hide) the "([^"]*)" column of the index$
+^(I |we )*sort the index by "([^"]*)" in "(ascending|descending)" order$
+^(I |we )*start a new (entry|category) in the "([^"]*)" (?:section|group)$
+^(I |we )*start recording network requests$
+^(I |we )*start video recording$
+^(I |we )*stop video recording$
+^(I |we )*switch the edit form to the "([^"]*)" version$
+^(I |we )*switch the index to the "(table|cards|structure|thumbs)" view$
+^(I |we )*switch the "([^"]*)" switch (on|off)$
+^(I |we )*switch to iframe with locator "([^"]*)"$
+^(I |we )*switch to (the )?iframe "([^"]*)"$
+^(I |we )*switch to the iframe with name "([^"]*)"$
+^(I |we )*switch to the iframe with title "([^"]*)"$
+^(I |we )*switch to the root document$
+^(I |we )*tap on "([^"]*)"$
+^(I |we )*trigger the JS event "([^"]*)" on the element "([^"]*)"$
+^(I |we )*uncheck "([^"]*)?"$
+^(I |we )*uncheck the checkbox "([^"]*)"$
+^(I |we )*unselect "([^"]*)" from "([^"]*)"$
+^(I |we )*upload the file "([^"]*)" to the assets index$
+^(I |we )*upload the file "([^"]*)" to the "([^"]*)" field$
+^(I |we )*view the page of the edit form on the site$
+^(I |we )*visit the page of "([^"]*)" from the index$
+^(I |we )*wait (\d+)( minute| minutes|m)?$
+^(I |we )*wait (\d+)( second| seconds|s)?$
+^(I |we )*wait for AJAX to finish$
+^(I |we )*wait for (\d+) seconds?$
+^(I |we )*wait for (\d+) seconds? for AJAX to finish$
+^(I |we )*wait for the edit form to store (?:my|our) changes$
+^(I |we )*wait for( the)* modal( dialog)* to (appear|disappear)$
+^(I |we )*wait for( the)* text "([^"]*)" to appear$
+^(I |we )*wait for( the)* text "([^"]*)" to disappear$
+^(I |we )*wait for "([^"]*)" to appear$
+^(I |we )*wait for "([^"]*)" to disappear$
+^(I |we )*wait max of (\d+)( minute| minutes|m)?$
+^(I |we )*wait max of (\d+)( second| seconds|s)?$
+^(I |we )*wait until at least (\d+) elements? match(?:es)? "([^"]*)"$
+^(I |we )*wait until (\d+) elements? match(?:es)? "([^"]*)"$
+^(I |we )*wait until pending timers settle$
+^(I |we )*wait until (the network is idle|requests are complete|network goes quiet)$
+^(I |we )*wait until( the)* page is interactive$
+^(I |we )*wait until( the)* page( is)* loaded*$
+^(I |we )*wait until( the)* page title (is|contains) "([^"]*)"$
+^(I |we )*wait until( the)* URL contains "([^"]*)"$
+^(I |we )*will accept the next dialog$
+^(I |we )*will accept the next dialog with "([^"]*)"$
+^(I |we )*will dismiss the next dialog$
+^JavaScript errors should not match "([^"]*)"$
+^local storage is cleared$
+^no element should have a positive tabindex$
+^no request to "([^"]*)" should have been made$
+^print API response$
+^print current URL$
+^print JavaScript errors$
+^print last response$
+^print video path$
+^required fields should be consistently marked$
+^session storage is cleared$
+^"([^"]*)" should be at level (\d+) in the index$
+^"([^"]*)" should be in the viewport(?: within (\d+) seconds?)?$
+^"([^"]*)" should be (visible|hidden|attached|focused|enabled|disabled|editable)(?: within (\d+) seconds?)?$
+^"([^"]*)" should come before "([^"]*)" in the index$
+^"([^"]*)" should contain text "([^"]*)"(?: within (\d+) seconds?)?$
+^"([^"]*)" should have a count of (\d+)(?: within (\d+) seconds?)?$
+^"([^"]*)" should have attribute "([^"]*)" with value "([^"]*)"(?: within (\d+) seconds?)?$
+^"([^"]*)" should have class "([^"]*)"(?: within (\d+) seconds?)?$
+^"([^"]*)" should have text "([^"]*)"(?: within (\d+) seconds?)?$
+^"([^"]*)" should have the status "([^"]*)" in the index$
+^"([^"]*)" should have value "([^"]*)"(?: within (\d+) seconds?)?$
+^"([^"]*)" should not be in the viewport(?: within (\d+) seconds?)?$
+^"([^"]*)" should( not)* be published on the site$
+^"([^"]*)" should not be (visible|hidden|attached|focused|enabled|disabled|editable)(?: within (\d+) seconds?)?$
+^"([^"]*)" should show a thumbnail in the index$
+^"([^"]*)" should show "([^"]*)" in the "([^"]*)" column of the index$
+^the actions menu of the edit form should( not)* offer "([^"]*)"$
+^(?:the API base URL is|I set the API base URL to|the base URL is) "([^"]*)"$
+^(?:the )?API response code should be (\d+)$
+^(?:the )?API response should contain "([^"]*)"$
+^(?:the )?API response should contain json:$
+^(?:the )?API response should not contain "([^"]*)"$
+^the "([^"]*)" (button|link|tab|menuitem|checkbox|radio|option) should be visible(?: within (\d+) seconds?)?$
+^the control panel breadcrumb should be "([^"]*)"$
+^the control panel heading should be "([^"]*)"$
+^the control panel navigation item "([^"]*)" should be selected$
+^the control panel system name should be "([^"]*)"$
+^(?:the cookie|cookie) "([^"]*)" is set to "([^"]*)"$
+^the cookie "([^"]*)" is removed$
+^the "([^"]*)" date should be "([^"]*)"$
+^the "([^"]*)" dropdown should show "([^"]*)"$
+^the edit form should( not)* have the "([^"]*)" field$
+^the edit form should show the status "([^"]*)"$
+^the edit form should show the "([^"]*)" version$
+^(the )*"([^"]*)?" element should( not)* contain "([^"]*)?"$
+^the element "([^"]*)" should not violate the accessibility rule "([^"]*)"$
+^the element "([^"]*)" should pass an accessibility audit$
+^the error summary of the edit form should count (\d+) errors?$
+^the error summary of the edit form should name "([^"]*)"$
+^the "([^"]*)" field should have (\d+) blocks?$
+^the "([^"]*)" field should have (-?\d+) characters? left$
+^the "([^"]*)" field should have the error "([^"]*)"$
+^the "([^"]*)" field should have the value "([^"]*)"$
+^the "([^"]*)" field should( not)* be marked as required$
+^the "([^"]*)" field should( not)* hold "([^"]*)"$
+^the focused element should be labeled "([^"]*)"$
+^the focused element should match "([^"]*)"$
+^the heading hierarchy should be valid$
+^the index should be sorted by "([^"]*)" in "(ascending|descending)" order$
+^the index should hold (\d+) items?$
+^the index should show items (\d+) to (\d+) of (\d+)$
+^(?:the JSON response should have property|the API response should contain property) "([^"]*)"$
+^(?:the JSON response should have|the API response should have|the JSON property) "([^"]*)" (?:equal to|should be) (.+)$
+^(?:the JSON response should not have property|the API response should not contain property) "([^"]*)"$
+^the last dialog message should be "([^"]*)"$
+^the last dialog message should contain "([^"]*)"$
+^the last dialog type should be "([^"]*)"$
+^(the )*"([^"]*)?" link should contain "([^"]*)?"$
+^(the )*"([^"]*)?" link should contain "([^"]*)?" by( its)*(?: "([^"]*)?")* (attribute|attr)$
+^(?:the )?local storage "([^"]*)" is removed$
+^(?:the )?local storage "([^"]*)" is set to "([^"]*)"$
+^the network is offline$
+^the network is online$
+^the page language should be "([^"]*)"$
+^the page should declare a language$
+^the page should have a main landmark$
+^the page should have a navigation landmark$
+^the page should have a skip link$
+^the page should have a title$
+^the page should have exactly one h1$
+^the page should have no accessibility violations$
+^the page should have no (critical|serious|moderate|minor) accessibility violations$
+^the page should not violate the accessibility rule "([^"]*)"$
+^the page should pass an accessibility audit(?: at level "(A|AA|AAA)")?$
+^the page should pass an accessibility audit excluding "([^"]*)"$
+^the page should pass the accessibility rules "([^"]*)"$
+^the page should pass the full accessibility check(?: at level "(A|AA|AAA)")?$
+^the preview should( not)* show "([^"]*)"$
+^there is no (entry|category|asset) titled "([^"]*)"$
+^there should be no JavaScript errors$
+^there should be no JavaScript warnings$
+^(?:the response header|the header) "([^"]*)" should (?:be|contain) "([^"]*)"$
+^(?:the response should be valid JSON|the API response should be valid JSON)$
+^(the )*response should( not)* contain "([^"]*)?"$
+^(the )*response status code should( not)* be (\d+)$
+^the rich text field "([^"]*)" should( not)* contain "([^"]*)"$
+^the save button of the edit form should read "([^"]*)"$
+^the selected items should( not)* offer the action "([^"]*)"$
+^(?:the )?session storage "([^"]*)" is removed$
+^(?:the )?session storage "([^"]*)" is set to "([^"]*)"$
+^the site should be powered by "([^"]*)"$
+^the "([^"]*)" source of the index should be selected$
+^the "([^"]*)" switch should be (on|off)$
+^the system time is "([^"]*)"$
+^the URL "([^"]*)" is blocked$
+^the URL "([^"]*)" is delayed by (\d+) ?ms$
+^the URL "([^"]*)" returns status (\d+)(?: with body "([^"]*)")?$
+^the URL "([^"]*)" returns the JSON:$
+^(the )*url should( not)* match "([^"]*)?"$
+^the version menu of the edit form should( not)* list "([^"]*)"$
+^user zoom should be allowed$
