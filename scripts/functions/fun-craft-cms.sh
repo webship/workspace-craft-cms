@@ -368,6 +368,19 @@ if ('node_modules/%s/' % pack) not in src:
         sys.exit("  cucumber.js has no require list this can add to. Add this line to it:\n    " + line)
     print('  cucumber.js: the step definitions of %s' % pack)
 
+if not re.search(r"^[ \t]*mailUrl:", src, re.M):
+    world = re.search(r"^([ \t]*)worldParameters:[ \t]*\{[ \t]*$", src, re.M)
+    if not world:
+        sys.exit("  cucumber.js has no worldParameters block to add the mailbox to.")
+    pad = world.group(1) + '  '
+    block = [
+        pad + "// The mailbox that catches the mail of the site (the password reset steps read it): MAIL_URL, which",
+        pad + "// the tests container gives on a runtime other than DDEV, else DDEV's Mailpit, the site's address on port 8026.",
+        pad + "mailUrl: process.env.MAIL_URL || (process.env.LAUNCH_URL || '').replace(/\\/+$/, '') + ':8026',",
+    ]
+    src = src[:world.end()] + '\n' + '\n'.join(block) + src[world.end():]
+    print('  cucumber.js: the mailbox')
+
 if not re.search(r"^[ \t]*users:[ \t]*\{", src, re.M):
     world = re.search(r"^([ \t]*)worldParameters:[ \t]*\{[ \t]*$", src, re.M)
     if not world:

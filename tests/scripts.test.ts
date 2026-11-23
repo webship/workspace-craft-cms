@@ -269,3 +269,26 @@ test('the feature of the runtimes drives a site of the platform, and names no pl
   assert.ok(manifest.features.includes('features/craft-cms-runtimes.feature'));
   assert.match(manifest.featuresSite, /^cmd-craft-cms-project\.sh ci-craft-cms( [A-Za-z0-9._=-]+)* --runtime docker$/);
 });
+
+test('the testing hook gives the suite the mailbox: MAIL_URL on a runtime other than DDEV, port 8026 of the site on DDEV, once', () => {
+  const p = project('craftcms');
+  const run = () => bash(`cd ${p.dir} && testing_configure_craftcms ${p.dir}`, { WORKSPACE_ROOT: p.root, WORKSPACE_SCRIPTS: p.scripts, doc_name: 'dev', PROJECT_NAME: 'site1', DDEV_ADMINS: THE_DEFAULT });
+  const r = run();
+  assert.strictEqual(r.status, 0, r.stderr + r.stdout);
+  assert.match(r.stdout, /cucumber\.js: the mailbox/);
+  const file = path.join(p.dir, 'cucumber.js');
+  const cucumber = fs.readFileSync(file, 'utf8');
+  assert.strictEqual((cucumber.match(/^\s*mailUrl:/gm) || []).length, 1);
+  const mail = (env: Record<string, string>) => {
+    const loaded = spawnSync(process.execPath, ['-e', `console.log(require(${JSON.stringify(file)}).default.worldParameters.mailUrl)`], { encoding: 'utf8', env: { ...process.env, MAIL_URL: '', LAUNCH_URL: '', ...env } });
+    assert.strictEqual(loaded.status, 0, loaded.stderr);
+    return loaded.stdout.trim();
+  };
+  // DDEV: the tests run with the site's address, and its Mailpit answers on port 8026 of it.
+  assert.strictEqual(mail({ LAUNCH_URL: 'https://site1.ddev.site/' }), 'https://site1.ddev.site:8026');
+  // Another runtime: the tests container hands the suite the mailbox (the core's rt_mail_url).
+  assert.strictEqual(mail({ LAUNCH_URL: 'http://127.0.0.1:41234', MAIL_URL: 'http://127.0.0.1:41235' }), 'http://127.0.0.1:41235');
+  // Again: not twice, and a mailbox a person set stays.
+  assert.strictEqual(run().status, 0);
+  assert.strictEqual(fs.readFileSync(file, 'utf8'), cucumber);
+});

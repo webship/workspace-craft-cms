@@ -34,7 +34,7 @@ bash cmd-tools-testing.sh mysite          # webship-js, the step pack, the users
 ```
 
 For a Craft CMS project the setup adds the pack to `package.json`, lists its step definitions in
-`cucumber.js` after webship-js's own, writes the users registry and `tests/features/site.feature`,
+`cucumber.js` after webship-js's own, writes the users registry, the mailbox (`mailUrl`) and `tests/features/site.feature`,
 and says whether the site's account is the default account. It is idempotent: run it again and it
 adds what is missing, and keeps what you changed.
 
