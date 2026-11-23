@@ -219,8 +219,10 @@ bash cmd-tools-testing.sh mysite --run --path tests/features/site.feature
 `cmd-tools-testing.sh` is the workspace's own. For a Craft CMS project it also adds
 `@webship-js/craft-cms-steps` to `package.json`, lists its step definitions in `cucumber.js` after
 webship-js's own, writes the users registry (the handle `admin`, overridable with `ADMIN_USER` and
-`ADMIN_PASSWORD`), places `tests/features/site.feature` when the project has none, and says whether
-the site's account is the default account. Run it again and it adds what is missing and keeps what
+`ADMIN_PASSWORD`) and the mailbox the pack's mail steps read (`mailUrl`: port 8026 of the site's
+address on DDEV, the `MAIL_URL` the tests container is given on another runtime), places
+`tests/features/site.feature` when the project has none, and says whether the site's account is the
+default account. Run it again and it adds what is missing and keeps what
 you changed.
 
 The first feature covers the front page, the login form and the admin: logging in, the pages an
