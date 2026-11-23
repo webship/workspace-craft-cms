@@ -23,12 +23,12 @@ Feature: A site on Docker Compose and on Kubernetes
       And the open menu should offer "Cancel the test users"
 
   @needs-runtime-docker @needs-platform-craftcms
-  Scenario: The site on Docker Compose is installed: its front page and the login of its control panel
+  Scenario: The site on Docker Compose is installed: its control panel asks for a login
     Given I am on the folder of the "docker" site
-     When I open "/" on the "docker" site
-     Then I should see "Go to your control panel"
-     When I open "/admin/login" on the "docker" site
+     When I open "/admin" on the "docker" site
      Then I should see "Username or Email"
+     When I open "/admin/login" on the "docker" site
+     Then I should see "Forgot password?"
 
   @needs-runtime-kubernetes @needs-platform-craftcms
   Scenario: A site built on Kubernetes runs at the address of its node, with the K8S menu
@@ -46,9 +46,9 @@ Feature: A site on Docker Compose and on Kubernetes
       And the open menu should offer "Cancel the test users"
 
   @needs-runtime-kubernetes @needs-platform-craftcms
-  Scenario: The site on Kubernetes is installed: its front page and the login of its control panel
+  Scenario: The site on Kubernetes is installed: its control panel asks for a login
     Given I am on the folder of the "kubernetes" site
-     When I open "/" on the "kubernetes" site
-     Then I should see "Go to your control panel"
-     When I open "/admin/login" on the "kubernetes" site
+     When I open "/admin" on the "kubernetes" site
      Then I should see "Username or Email"
+     When I open "/admin/login" on the "kubernetes" site
+     Then I should see "Forgot password?"
