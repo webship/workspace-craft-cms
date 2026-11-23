@@ -51,7 +51,13 @@ test('the functions carry the names the core\'s tools look for, and never write 
     assert.match(src, new RegExp(`^function ${fn}\\(\\) \\{`, 'm'), `${fn} is defined`);
   }
   assert.match(src, /--project-type=craftcms /);
-  assert.doesNotMatch(src, /CRAFT_DB_|--db-|DB_PASSWORD|DB_SERVER/, 'the container tool owns the database settings');
+  // The database settings only where DDEV's craftcms type gives them and another runtime does not: craftcms_runtime_config.
+  const own = src.slice(src.indexOf('function craftcms_runtime_config() {'), src.indexOf('\n}\n', src.indexOf('function craftcms_runtime_config() {')));
+  assert.match(own, /CRAFT_DB_SERVER=db CRAFT_DB_PORT=3306/, 'the stack\'s own values, nothing personal');
+  assert.doesNotMatch(src.replace(own, ''), /CRAFT_DB_[A-Z_]+=|--db-|DB_PASSWORD|DB_SERVER=/, 'the container tool owns the database settings');
+  assert.match(src.slice(src.indexOf('function craftcms_build() {')), /if \[ "\$\{runtime\}" != 'ddev' \] ; then\n[^\n]*\n\s+craftcms_runtime_config/, 'only on a runtime that is not DDEV');
+  assert.doesNotMatch(src.replace(/^\s*#.*$/gm, '').replace(/echo "https:\/\/\$\{PROJECT_NAME\}\.ddev\.site"/, ''), /ddev\.site/, 'ddev.site only as the answer of a core with no layer');
+  assert.doesNotMatch(src.replace(/^\s*#.*$/gm, ''), /(?<![.\w])(docker|podman|kubectl) |command ddev/, 'only `ddev <verb>`: the layer chooses');
   assert.match(src, /--nodejs-version=\$\(ddev_nodejs_version\)/, 'the build runs the Node.js of the workspace rule');
   assert.doesNotMatch(src, /ddev stop -y/, 'ddev stop takes no -y');
 });

@@ -85,6 +85,7 @@ A workspace that knows none of this (Webship Workspace 1.0.8 and older) ignores 
 | `docs/plugin-items-pattern.md` | How a plugin carries its own commands and AI items, and how to prove it |
 | `src/index.ts` | `register(api)`: what the assistant is told about Craft CMS here |
 | `features/craft-cms.feature` | Scenarios for the dashboard's own browser suite |
+| `features/craft-cms-runtimes.feature` | The row, the test users and two pages of a site built on Docker Compose and on Kubernetes |
 
 The `workspacePlugin` block in `package.json` is the manifest the installer reads.
 
@@ -106,13 +107,70 @@ bash cmd-craft-cms-project.sh mysite --install --add-users    # the one account 
 | `--install` | Install the site on the Solo edition, with the workspace account as its one account |
 | `--add-users` | With `--install`: the one account is the default account `administrator` instead, the one the test scenarios log in as |
 | `--php-version <x>` | The PHP of the project container (`8.3`) |
+| `--runtime <name>` | The container runtime to build on: `ddev` (the default), `docker`, `kubernetes`, `podman`, `lando` or `docksal`. See [Runtimes](#runtimes) |
 | `--launch` | Open the site when it is ready |
 
-The site answers at `https://mysite.ddev.site`, the control panel at `/admin`. The build runs
+On DDEV the site answers at `https://mysite.ddev.site`, the control panel at `/admin`. The build runs
 `ddev config --project-type=craftcms` with the docroot `web` and the Node.js of the workspace (24),
 creates the project with Composer in the container from the starter `craftcms/craft`, and installs
 it with Craft's own `install/craft` command, which asks no question. The container tool gives the
 project its database settings: the plugin writes none. A project of the same name is deleted first.
+
+
+### Runtimes
+
+```bash
+bash cmd-craft-cms-project.sh mysite --install --add-users                        # DDEV, the default
+bash cmd-craft-cms-project.sh mysite --install --add-users --runtime docker       # Docker Compose
+bash cmd-craft-cms-project.sh mysite --install --add-users --runtime kubernetes   # a Kubernetes cluster
+bash cmd-craft-cms-project.sh mysite --install --add-users --runtime lando        # Lando
+bash cmd-craft-cms-project.sh mysite --install --add-users --runtime docksal      # Docksal
+```
+
+Without `--runtime` a build takes `container.runtime` of the workspace's `settings.yml`, then DDEV.
+It needs a Webship Workspace with the container runtimes
+([webship/workspace#694](https://github.com/webship/workspace/issues/694)); on an older one the
+builder refuses `--runtime` and builds on DDEV only. Lando and Docksal need a Workspace whose runtime
+layer has them ([webship/workspace#729](https://github.com/webship/workspace/issues/729),
+[#730](https://github.com/webship/workspace/issues/730)).
+
+| | DDEV | Docker Compose | Kubernetes | Podman | Lando | Docksal |
+| --- | --- | --- | --- | --- | --- | --- |
+| Build with `--install --add-users` (the Solo edition, its one account) | Yes | Yes | Yes | Not yet run | Yes | Yes |
+| The front page and the control panel's login | Yes | Yes | Yes | Not yet run | Yes | Yes |
+| `cmd-tools-craft-cms-cli.sh`: status, `--run`, the account | Yes | Yes | Yes | Not yet run | Yes | Yes |
+| The test account, said to be there and kept | Yes | Yes | Yes | Not yet run | Yes | Yes |
+| Mail caught by Mailpit (`--run "mailer/test …"`) | Yes | Yes | Yes | Not yet run | Yes | Yes |
+| The testing setup and the first feature | Yes | Yes | Yes | Not yet run | Yes | Yes |
+| The step pack's examples, with its content (99 scenarios) | 95 of 99 (*) | 95 of 99 (*) | 95 of 99 (*) | Not yet run | 95 of 99 (*) | 95 of 99 (*) |
+| Export and import the database | Yes | Yes | Yes | Not yet run | Yes | Yes |
+| The row in the dashboard, and remove | Yes | Yes | Yes | Not yet run | Yes | Yes |
+
+"Yes" means it was run on a real site of that runtime. Podman runs the same code as Docker Compose
+and was not run yet. (*) With the content of the step pack's README (its editor field, templates and
+seed), on every runtime, DDEV included: the four are the ones its README names for a site of this
+plugin, which read the account and the site name of the pack's own test site (`admin`,
+`admin@example.com`, "Webship Test Site").
+
+| Runtime | The site's address | What the project carries |
+| --- | --- | --- |
+| DDEV | `https://mysite.ddev.site` | `.ddev/config.yaml` |
+| Docker Compose | `http://127.0.0.1:<port>`, printed by the build | `compose.yaml`, `.webship/runtime/Dockerfile` |
+| Kubernetes | `http://<node address>:<port>`, printed by the build | The same, and `k8s/` (the namespace `ws-mysite`) |
+| Lando | `http://127.0.0.1:<port>`, printed by the build | `.lando.yml` (Lando's proxy stays off) |
+| Docksal | `http://mysite.docksal.site`, on Docksal's own proxy | `.docksal/docksal.env`, `.docksal/docksal.yml` |
+
+What differs on Docker Compose, Kubernetes, Lando and Docksal:
+
+- **`.env`** gets the database DDEV's `craftcms` type gives the container: `CRAFT_DB_DRIVER=mysql`, `CRAFT_DB_SERVER=db`, `CRAFT_DB_PORT=3306`, `CRAFT_DB_DATABASE=db`, `CRAFT_DB_USER=db`, `CRAFT_DB_PASSWORD=db`. Nothing personal; on DDEV the builder still writes none.
+- **The site URL** the install records (`PRIMARY_SITE_URL`) is the runtime's address.
+- **Mail:** Craft's own Sendmail transport goes through the container's `sendmail`, which each runtime hands to its mail catcher.
+- **`composer create-project`** is told the project root (`.`), as DDEV takes it.
+- **HTTPS and a host name** are DDEV's: a runtime's address is plain HTTP.
+
+The same commands work on every runtime: `cmd-tools-craft-cms-cli.sh`, `cmd-tools-add-users.sh`,
+`cmd-tools-testing.sh`. The pattern is the Workspace's
+[`core/docs/plugins-on-runtimes.md`](https://github.com/webship/workspace/blob/1.0.x/core/docs/plugins-on-runtimes.md).
 
 ### Work on a site
 

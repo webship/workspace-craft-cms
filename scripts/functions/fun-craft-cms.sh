@@ -5,8 +5,16 @@
 #
 # Placed by `plugins.sh --install craft-cms` in core/scripts/plugins/craft-cms/functions/, where
 # bootstrap sources it after the core's own functions. Everything runs in the project's container
-# (DDEV by default: `ddev composer …`, `ddev exec php craft …`), never on the host. The container
-# tool gives the project its database settings; nothing here writes any.
+# (DDEV by default: `ddev composer …`, `ddev exec php craft …`), never on the host. On DDEV the
+# container tool gives the project its database settings; nothing here writes any.
+#
+# The runtimes: a site is built on DDEV, or with --runtime on Docker Compose, Podman, Kubernetes, Lando
+# or Docksal. The commands are the same on each: `ddev <verb>` is DDEV itself on a DDEV project, and on
+# another runtime the core's layer (fun-runtime.sh) gives the verb its meaning there. What differs is
+# behind craftcms_runtime: the address (craftcms_url), the folder `composer create-project` makes the
+# project in (DDEV takes the project root, the layer is told "."), and what DDEV's craftcms type gives
+# the site and the other runtimes do not (craftcms_runtime_config: the database of the project's own
+# stack, db/db/db on the host db, in the site's .env).
 #
 # The site is the free Solo edition and stays on it: it has ONE account, an admin, and no user
 # groups. Nothing here enters a licence, switches a paid edition on (not even as a trial), or signs
@@ -33,9 +41,65 @@ function set_craftcms_users() {
   printf -v "user_administrator_role" '%s' 'admin' ;
 }
 
-# Is this folder a Craft CMS project? Its DDEV project type says so.
+# The runtime of the project in this folder, or of a new build (--runtime, else the workspace's
+# setting, else DDEV). A core without the runtime layer has DDEV only.
+function craftcms_runtime() {
+  if declare -f runtime_of > /dev/null ; then runtime_of ; else echo 'ddev' ; fi
+}
+
+# The address of the site in this folder: https://<name>.ddev.site on DDEV, http://127.0.0.1:<port> on
+# Docker Compose, Podman and Lando, the node's address and a port on Kubernetes, http://<name>.docksal.site
+# on Docksal. Asked after `ddev config`.
+function craftcms_url() {
+  if declare -f rt_url > /dev/null ; then rt_url ; else echo "https://${PROJECT_NAME}.ddev.site" ; fi
+}
+
+# Set keys of the site's .env: each where the file has it (commented out or not), else at the end.
+# Only on a runtime that is not DDEV: there DDEV's craftcms type gives the container the values.
+function craftcms_dotenv_set() {
+  python3 - "$@" <<'PYEOF'
+import re, sys
+path, pairs = sys.argv[1], []
+for arg in sys.argv[2:]:
+    key, _, value = arg.partition('=')
+    if not re.match(r'^[A-Z][A-Z0-9_]*$', key):
+        sys.exit('craftcms_dotenv_set: KEY=value, not ' + arg)
+    if re.search(r'[\s#"\'$\\]', value):
+        value = '"' + value.replace('\\', '\\\\').replace('"', '\\"') + '"'
+    pairs.append((key, value))
+try:
+    lines = open(path).read().split('\n')
+except FileNotFoundError:
+    lines = []
+if lines and lines[-1] == '':
+    lines.pop()
+for key, value in pairs:
+    found = [i for i, l in enumerate(lines) if re.match(r'^\s*' + re.escape(key) + r'\s*=', l)] \
+        or [i for i, l in enumerate(lines) if re.match(r'^\s*#\s*' + re.escape(key) + r'\s*=', l)]
+    if found:
+        lines[found[0]] = key + '=' + value
+    else:
+        lines.append(key + '=' + value)
+open(path, 'w').write('\n'.join(lines) + '\n')
+PYEOF
+}
+
+# What DDEV's craftcms project type gives the site, and the other runtimes do not: the database of the
+# project's own stack (db, db, db on the host db, as on every runtime), in the site's .env. Only on a
+# runtime that is not DDEV, in the project folder.
+function craftcms_runtime_config() {
+  craftcms_dotenv_set .env CRAFT_DB_DRIVER=mysql CRAFT_DB_SERVER=db CRAFT_DB_PORT=3306 \
+    CRAFT_DB_DATABASE=db CRAFT_DB_USER=db CRAFT_DB_PASSWORD=db CRAFT_DB_SCHEMA= CRAFT_DB_TABLE_PREFIX= ;
+}
+
+# Is this folder a Craft CMS project? Its project type says so: on DDEV in .ddev/config.yaml, on another
+# runtime in the x-webship block, both read by the core's rt_is_platform.
 function craftcms_is_project() {
   local project_path="$1";
+  if declare -f rt_is_platform > /dev/null ; then
+    rt_is_platform "${project_path}" craftcms ;
+    return $? ;
+  fi
   grep -qE '^type:[[:space:]]*"?craftcms"?[[:space:]]*$' "${project_path}/.ddev/config.yaml" 2>/dev/null ;
 }
 
@@ -52,7 +116,7 @@ function craftcms_enter_project() {
     return 1 ;
   fi
   if ! craftcms_is_project "${project_path}" ; then
-    echo "${doc_name}/${PROJECT_NAME} is not a Craft CMS project (its .ddev/config.yaml does not say type: craftcms)." ;
+    echo "${doc_name}/${PROJECT_NAME} is not a Craft CMS project (its project type is not craftcms)." ;
     return 1 ;
   fi
   cd "${project_path}" || return 1 ;
@@ -86,7 +150,12 @@ function craftcms_edition() {
 # Build a Craft CMS site from nothing: the container, the code, and with --install the site itself.
 function craftcms_build() {
   trim_project_name ;
-  local base_url="https://${PROJECT_NAME}.ddev.site" ;
+  local base_url runtime ;
+  runtime="$(craftcms_runtime)" ;
+  if [ "${RUNTIME:-_none_}" != '_none_' ] && [ "${RUNTIME}" != "${runtime}" ] ; then
+    echo "--runtime ${RUNTIME} needs a Webship Workspace with the container runtimes (webship/workspace#694): update the workspace, or build on DDEV." ;
+    exit 1 ;
+  fi
   local version="${VERSION:-${site_version:-^5}}" ;
   local php_version="${PHP_VERSION:-${site_php_version:-8.3}}" ;
   local admin_name="${account_name}" admin_pass="${account_pass}" admin_mail="${account_mail}" ;
@@ -100,14 +169,23 @@ function craftcms_build() {
 
   ddev config --project-type=craftcms --docroot="${distribution_webroot}" --project-name=${PROJECT_NAME} \
     --php-version=${php_version} --nodejs-version=$(ddev_nodejs_version) || exit 1 ;
+  # The address is the runtime's to say, once the project is configured: never a written ddev.site.
+  base_url="$(craftcms_url)" ;
   ddev_up start -y || exit 1 ;
 
   # The starter project. Its post-create script opens an installer that asks questions, so the
   # scripts are skipped and their steps are done here: the environment file and the project's own
   # composer.json.
-  ddev composer create-project "${project_template}" --no-scripts --no-interaction \
+  # DDEV makes it in the project root; the layer of another runtime is told so (".").
+  local into='' ;
+  [ "${runtime}" != 'ddev' ] && into='.' ;
+  ddev composer create-project "${project_template}" ${into} --no-scripts --no-interaction \
     || { echo "composer create-project ${project_template} failed." ; exit 1 ; } ;
   cp .env.example.dev .env || exit 1 ;
+  if [ "${runtime}" != 'ddev' ] ; then
+    # What DDEV's craftcms type gives the container: the database of the project's own stack.
+    craftcms_runtime_config || { echo "The .env of the site could not be written." ; exit 1 ; } ;
+  fi
   rm -f composer.json && mv composer.json.default composer.json || exit 1 ;
   if [ ! "${version}" == '^5' ] ; then
     ddev composer require "craftcms/cms:${version}" --no-interaction --with-all-dependencies \
@@ -220,7 +298,7 @@ function craftcms_cli_tool() {
     set_craftcms_users ;
     cancel_craftcms_users ;
   else
-    echo "${doc_name}/${PROJECT_NAME}: Craft CMS $(craftcms_version) at https://${PROJECT_NAME}.ddev.site" ;
+    echo "${doc_name}/${PROJECT_NAME}: Craft CMS $(craftcms_version) at $(craftcms_url)" ;
     if craftcms_is_installed "$(pwd)" ; then
       echo "Edition: $(craftcms_edition "$(pwd)")" ;
       echo "" ; echo "The account:" ; craftcms_cli users/list-admins ;
