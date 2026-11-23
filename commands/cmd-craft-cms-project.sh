@@ -5,7 +5,8 @@
 # Installed by the Craft CMS plugin (plugins.sh --install craft-cms); __WORKSPACE__ is the workspace it was installed into.
 #
 # Build a Craft CMS site in a container: the current release of Craft CMS 5, or the one --version
-# names, at https://<name>.ddev.site, on the free Solo edition. With --install the site is
+# names, on DDEV (the default) at https://<name>.ddev.site, or
+# with --runtime docker, podman, kubernetes, lando or docksal at the address the build prints, on the free Solo edition. With --install the site is
 # installed with the workspace account as its one account, an admin; with --add-users that one
 # account is the default account instead, the one the test scenarios log in as.
 

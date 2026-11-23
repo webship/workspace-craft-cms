@@ -49,11 +49,13 @@ bash cmd-craft-cms-project.sh mysite --install
 | `--php-version <x>` | The PHP of the project container (`8.3` by default). |
 | `--launch` | Opens the site when it is ready. |
 
-The site answers at `https://<name>.ddev.site`, the control panel at `/admin`. It is a Composer
+On DDEV the site answers at `https://<name>.ddev.site`, the control panel at `/admin`. It is a Composer
 project from the starter `craftcms/craft`: the docroot is `web/`, the templates are in `templates/`,
 the project config in `config/project/`. The builder **deletes a project of the same name first**: a
 build is a clean slate, so never point it at a site somebody still needs. The name is a folder, a
 container project and a host name: short, lowercase, letters and digits.
+
+With `--runtime docker`, `podman`, `kubernetes`, `lando` or `docksal` the site is built on that runtime instead, at the address the build prints (`http://127.0.0.1:<port>`, the node's address and a port, or `http://<name>.docksal.site`): never write a `ddev.site` address for such a site. Its mailbox is at the address `rt_mail_url` gives, and the same commands work on it.
 
 ## Work on a site
 

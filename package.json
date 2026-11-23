@@ -83,8 +83,10 @@
       ]
     },
     "features": [
-      "features/craft-cms.feature"
-    ]
+      "features/craft-cms.feature",
+      "features/craft-cms-runtimes.feature"
+    ],
+    "featuresSite": "cmd-craft-cms-project.sh ci-craft-cms --install --add-users --runtime docker"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

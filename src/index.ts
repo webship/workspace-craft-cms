@@ -41,7 +41,7 @@ export function assistantContext(): string {
   return [
     'Craft CMS (a plugin, @webship.co/workspace-craft-cms): a Craft CMS 5 site is built with',
     '`bash cmd-craft-cms-project.sh <name> --install` from a sites folder (dev, test, sandboxes, demos),',
-    'in a container like every other project, at https://<name>.ddev.site (the control panel at /admin).',
+    'in a container like every other project: on DDEV by default, at https://<name>.ddev.site, or with `--runtime docker|podman|kubernetes|lando|docksal` on that runtime, at the address the build prints, (the control panel at /admin).',
     'It is the free Solo edition and stays on it: one account, an admin, and no user groups; never a licence, a paid edition, a trial, or a sign-in to any account or store.',
     'That one account is the workspace account; with --add-users it is the default account instead, the one the test scenarios log in as.',
     '`bash cmd-tools-craft-cms-cli.sh <name>` says what the site is; `--run "<command>"` runs the craft console (php craft) in it,',
